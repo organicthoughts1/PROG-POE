@@ -1,0 +1,98 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package qinisomasuku_part1;
+
+/**
+ *
+ * @author Student
+ */
+import java.util.Scanner;
+public class QinisoMasuku_part1 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+Scanner input = new Scanner(System.in);
+// Create an object of the Login class
+Login login = new Login();
+// Declaring variables
+String firstName;
+String lastName;
+String username;
+String password;
+String cellPhoneNumber;
+// REGISTRATION
+System.out.println("====REGISTRATION====");
+// First name
+System.out.println("Please enter your firstname:");
+firstName = input.nextLine();
+// Last name
+System.out.println("Please enter your lastname:");
+lastName = input.nextLine();
+// Username
+while(true){
+System.out.println("Please enter your username:");
+username = input.nextLine();
+if (Login.checkUserName(username)){
+System.out.println("Username successfully captured.");
+break;
+}else{
+System.out.println("Username is not correctly formatted,"
++ "please ensure that your username contains an underscore,"
++ "and is no more than five chacters in length.");
+}
+}
+// Password
+while(true){
+System.out.println("Please enter your password: ");
+password= input.nextLine();
+if (Login.checkPasswordComplexity(password)){
+System.out.println("Password successfully captured");
+break;
+}
+else{
+System.out.println("Password is not correctly formatted.");
+System.out.println("Please ensure that the password contains at least eight characters, "
++ "a capital letter,a number and a special character.");
+}
+}
+//Cellphone number
+while(true){
+System.out.println("Please enter your cell phone number: ");
+cellPhoneNumber = input.nextLine();
+if (Login.checkCellPhoneNumber(cellPhoneNumber)){
+System.out.println("Cellphone number successfully added.");
+break;
+}
+else{
+System.out.println("Cell phone number incorrectly formatted or does not contain international code.");
+}
+}
+// Register the user
+String registrationMessage = login.registerUser(username, password,cellPhoneNumber);
+System.out.println("You have registered successfully.");
+System.out.println("Welcome " + firstName + " " + lastName);
+// LOGIN
+System.out.println("===== LOGIN =====");
+boolean loggedIn = false;
+while (loggedIn == false){
+System.out.println("Please enter your username: ");
+String loginUsername = input.nextLine();
+System.out.println("Please enter your password: ");
+String loginPassword = input.nextLine();
+loggedIn = login.loginUser(loginUsername, loginPassword);
+if (loggedIn == false){
+System.out.println("Username or password incorrect, please try again.");
+}
+}
+// Display login status
+System.out.println(login.returnLoginStatus(loggedIn, firstName, lastName));
+input.close();
+}
+}
+   
+    
